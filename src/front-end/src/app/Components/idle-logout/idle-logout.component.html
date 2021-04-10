@@ -1,0 +1,8 @@
+<h2 style="color:#d9281aeb"><mat-icon color="warn" style="vertical-align: middle; width: 40px !important; height: 40px !important; line-height: 40px !important; font-size: 40px !important;">error</mat-icon> Uyarı</h2>
+<p>
+  Uzun süre işlem yapmadığınız için oturumunuz {{this.subscribeTimer}} saniye içinde oturumunuz sonlandırılacaktır.
+</p>
+<p> Oturumuzu devam ettirmek ister misiniz?</p>
+<button mat-stroked-button color="primary" (click)="onYesClick()">Sürdür</button>
+
+<button mat-stroked-button color="warn"  (click)="onNoClick()">Sonlandır</button>

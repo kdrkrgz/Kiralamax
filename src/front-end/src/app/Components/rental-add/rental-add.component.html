@@ -1,0 +1,283 @@
+<div class="rent-form">
+  <h3 mat-dialog-title>Kiralanacak Aracın Özellikleri</h3>
+  <div mat-dialog-content>
+    <table class="renting-car-table" align="center">
+      <tr>
+        <th>Marka</th>
+        <th>Model</th>
+        <th>Vites</th>
+        <th>Renk</th>
+        <th>Günlük Ücret</th>
+        <th>Minimum Findeks Puanı</th>
+      </tr>
+      <tr>
+        <td>{{data.brand}}</td>
+        <td>{{data.carModel}}</td>
+        <td>{{data.gear}}</td>
+        <td>{{data.color}}</td>
+        <td>{{data.dailyPrice}}</td>
+        <td>{{data.minCreditScore}}</td>
+      </tr>
+    </table>
+    <div>
+      <table class="renting-car-table" align="center">
+        <tr>
+          <th>Müşreti Findeks Puanı</th>
+          <th>Durum</th>
+        </tr>
+        <tr *ngIf="this.CustomerCreditScore">
+          <td>
+            <p [ngClass]="{'success-message': this.isCreditScoreEnough, 'error-message': !this.isCreditScoreEnough}">
+              {{this.CustomerCreditScore}}</p>
+          </td>
+          <td>
+            <p *ngIf="!this.isCreditScoreEnough" class="error-message">Findeks kredi puanınız yeterli olmadığı için bu
+              aracı kiralayamazsınız.</p>
+            <p *ngIf="this.isCreditScoreEnough" class="success-message">Findeks kredi puanı aracı kiralamak için
+              yeterli.</p>
+          </td>
+        </tr>
+        <tr *ngIf="!this.CustomerCreditScore">
+          <td>Kredi puanı hesaplamak için müşteri seçiniz</td>
+          <td>Müşteri seçiniz</td>
+        </tr>
+      </table>
+    </div>
+    <div class="rent-details" *ngIf="this.totalRentDays">
+      <table class="renting-car-table" align="center">
+        <tr>
+          <th>Toplam Kiralama Günü</th>
+          <th>Toplam Ücret</th>
+          <th>KDV Dahil Toplam Ücret</th>
+        </tr>
+        <tr>
+          <td>{{this.totalRentDays}}</td>
+          <td>{{ this.totalRentDays * data.dailyPrice | currency:'':'':'1.0-2'|tryPipe:"TL"}}</td>
+          <td>{{this.totalRentDays * data.dailyPrice | vatAdded:18 | currency:'':'':'1.0-2'|tryPipe:"TL" }}</td>
+        </tr>
+      </table>
+    </div>
+
+
+
+    <!-- Stepper Customer Form Gruop -->
+    <mat-horizontal-stepper  [linear]="isLinear" #stepper>
+      <mat-step *ngIf="this.isUserAdmin" [stepControl]="customerFormGroup">
+        <form [formGroup]="customerFormGroup">
+          <ng-template matStepLabel>Müşteri Seçimi</ng-template>
+          <mat-form-field appearance="legacy">
+            <mat-label>Müşteri Seçiniz</mat-label>
+            <mat-select formControlName="customerId">
+              <mat-option *ngFor="let customer of customers" value="{{customer.customerId}}"
+                (click)="getCustomerCreditScore()">{{customer.customerName}} {{customer.customerLastName}}</mat-option>
+
+            </mat-select>
+          </mat-form-field>
+          <div>
+
+            <button [disabled]="!this.isCreditScoreEnough" mat-stroked-button color="primary"
+              matStepperNext>İleri</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="rentDateFormGroup" label="Tarih Aralığı">
+        <form [formGroup]="rentDateFormGroup" >
+          <mat-form-field appearance="legacy" >
+            <mat-label></mat-label>
+            <!-- <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                 required> -->
+
+            <mat-label>Kiralama Tarih Aralığı</mat-label>
+
+            <mat-date-range-input [rangePicker]="picker" [min]="minDate" [max]="maxDate" >
+              <input matStartDate placeholder="Start date" formControlName="rentDate">
+              <input matEndDate placeholder="End date" formControlName="returnDate">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+
+          <div>
+            <button mat-stroked-button color="accent" matStepperPrevious>Geri</button>
+            <button mat-stroked-button color="primary" [disabled]="!this.isCreditScoreEnough" (click)="this.getTotalRentDays()"
+              (click)="this.getCustomerCreditCards(this.customerFormGroup.controls['customerId']?.value)"
+              matStepperNext>Sonraki Adım</button>
+          </div>
+        </form>
+
+
+      </mat-step>
+      <mat-step [stepControl]="cardFormGroup">
+        <ng-template matStepLabel>Ödeme</ng-template>
+        <div class="payment-area">
+          <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Kayıtlı Kredi Kartlarıyla Ödeme
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-card *ngFor="let creditCards of customerCreditCards" class="saved-card">
+              <mat-card-content>
+                <p>
+                  <mat-icon class="middle">face</mat-icon> {{creditCards.cardOwner}}
+                </p>
+                <p>
+                  <mat-icon class="middle">payment</mat-icon> {{creditCards.cardNumber}}
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button color="primary" (click)="selectSavedCreditCard(creditCards.id)" mat-button>Ödemeyi Tamamla</button>
+                <button color="warn" (click)="deleteCustomerCreditCardWithConfirm(creditCards.id)" mat-button>Kaldır</button>
+              </mat-card-actions>
+            </mat-card>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Kredi Kartıyla Ödeme
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="payment-area">
+              <!-- Credit Card -->
+              <div class="credit-card">
+
+                <div class="payment-title">
+                </div>
+                <div class="container preload">
+                  <div class="creditcard">
+                    <div class="front">
+                      <div id="ccsingle"></div>
+                      <svg version="1.1" id="cardfront" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 750 471"
+                        style="enable-background:new 0 0 750 471;" xml:space="preserve">
+                        <g id="Front">
+                          <g id="CardBackground">
+                            <g id="Page-1_1_">
+                              <g id="amex_1_">
+                                <path id="Rectangle-1_1_" class="lightcolor grey" d="M40,0h670c22.1,0,40,17.9,40,40v391c0,22.1-17.9,40-40,40H40c-22.1,0-40-17.9-40-40V40
+                                    C0,17.9,17.9,0,40,0z" />
+                              </g>
+                            </g>
+                            <path class="darkcolor greydark"
+                              d="M750,431V193.2c-217.6-57.5-556.4-13.5-750,24.9V431c0,22.1,17.9,40,40,40h670C732.1,471,750,453.1,750,431z" />
+                          </g>
+                          <text transform="matrix(1 0 0 1 60.106 295.0121)" id="svgnumber"
+                            class="st2 st3 st4">{{cardFormGroup.controls["cardNumber"].value | creditCard}}</text>
+                          <text transform="matrix(1 0 0 1 54.1064 428.1723)" id="svgname"
+                            class="st2 st5 st6">{{cardFormGroup.controls["cardOwner"].value}}</text>
+                          <text transform="matrix(1 0 0 1 54.1074 389.8793)" class="st7 st5 st8">kart Sahibi</text>
+                          <text transform="matrix(1 0 0 1 479.7754 388.8793)" class="st7 st5 st8">geçerlilik
+                            tarihi</text>
+                          <text transform="matrix(1 0 0 1 65.1054 241.5)" class="st7 st5 st8">kart numarası</text>
+                          <g>
+                            <text transform="matrix(1 0 0 1 574.4219 433.8095)" id="svgexpire"
+                              class="st2 st5 st9">{{cardFormGroup.controls["expirationDate"].value}}</text>
+                            <text transform="matrix(1 0 0 1 479.3848 417.0097)" class="st2 st10 st11">VALID</text>
+                            <text transform="matrix(1 0 0 1 479.3848 435.6762)" class="st2 st10 st11">THRU</text>
+                            <polygon class="st2" points="554.5,421 540.4,414.2 540.4,427.9 		" />
+                          </g>
+                          <g id="cchip">
+                            <g>
+                              <path class="st2" d="M168.1,143.6H82.9c-10.2,0-18.5-8.3-18.5-18.5V74.9c0-10.2,8.3-18.5,18.5-18.5h85.3
+                                c10.2,0,18.5,8.3,18.5,18.5v50.2C186.6,135.3,178.3,143.6,168.1,143.6z" />
+                            </g>
+                            <g>
+                              <g>
+                                <rect x="82" y="70" class="st12" width="1.5" height="60" />
+                              </g>
+                              <g>
+                                <rect x="167.4" y="70" class="st12" width="1.5" height="60" />
+                              </g>
+                              <g>
+                                <path class="st12" d="M125.5,130.8c-10.2,0-18.5-8.3-18.5-18.5c0-4.6,1.7-8.9,4.7-12.3c-3-3.4-4.7-7.7-4.7-12.3
+                                    c0-10.2,8.3-18.5,18.5-18.5s18.5,8.3,18.5,18.5c0,4.6-1.7,8.9-4.7,12.3c3,3.4,4.7,7.7,4.7,12.3
+                                    C143.9,122.5,135.7,130.8,125.5,130.8z M125.5,70.8c-9.3,0-16.9,7.6-16.9,16.9c0,4.4,1.7,8.6,4.8,11.8l0.5,0.5l-0.5,0.5
+                                    c-3.1,3.2-4.8,7.4-4.8,11.8c0,9.3,7.6,16.9,16.9,16.9s16.9-7.6,16.9-16.9c0-4.4-1.7-8.6-4.8-11.8l-0.5-0.5l0.5-0.5
+                                    c3.1-3.2,4.8-7.4,4.8-11.8C142.4,78.4,134.8,70.8,125.5,70.8z" />
+                              </g>
+                              <g>
+                                <rect x="82.8" y="82.1" class="st12" width="25.8" height="1.5" />
+                              </g>
+                              <g>
+                                <rect x="82.8" y="117.9" class="st12" width="26.1" height="1.5" />
+                              </g>
+                              <g>
+                                <rect x="142.4" y="82.1" class="st12" width="25.8" height="1.5" />
+                              </g>
+                              <g>
+                                <rect x="142" y="117.9" class="st12" width="26.2" height="1.5" />
+                              </g>
+                            </g>
+                          </g>
+                        </g>
+                        <g id="Back">
+                        </g>
+                      </svg>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+              <div class="payment-form">
+                <form [formGroup]="cardFormGroup">
+                  <div>
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Kart Sahibi</mat-label>
+                      <input matInput formControlName="cardOwner" placeholder="Kadir KARAGÖZ" required>
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Kart Numarası</mat-label>
+                      <input matInput formControlName="cardNumber" [ngModel]=" 0 | creditCard"
+                        placeholder="1234-5678-9876-5432" required>
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Son Kullanma Tarihi</mat-label>
+                      <input matInput formControlName="expirationDate" placeholder="05/2022" required>
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field appearance="legacy">
+                      <mat-label>CVV</mat-label>
+                      <input matInput formControlName="cvvCode" placeholder="123" required>
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-checkbox matInput formControlName="willBeRecorded" required>Kart Kaydedilsin mi?</mat-checkbox>
+                  </div>
+                </form>
+                <div mat-dialog-actions>
+
+                  <button mat-stroked-button [mat-dialog-close]="data.id" cdkFocusInitial color="primary"
+                    (click)="addRent()" matStepperNext>Ödemeyi
+                    Tamamla</button>
+                </div>
+              </div>
+              <!-- <p>{{cardFormGroup.controls["cardOwner"].value}}</p> -->
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <div mat-dialog-actions>
+          <button mat-stroked-button color="accent" matStepperPrevious>Geri</button>
+          <button mat-stroked-button color="warn" (click)="stepper.reset()">Başa Dön</button>
+          <button mat-stroked-button color="warn" (click)="onNoClick()">İptal</button>
+        </div>
+      </div>
+
+      </mat-step>
+    </mat-horizontal-stepper>
+
+
+
+  </div>
+  <!-- <div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">İptal</button>
+  <button mat-button [mat-dialog-close]="data.brand" cdkFocusInitial>Kiralamayı Onayla</button>
+</div> -->
+</div>

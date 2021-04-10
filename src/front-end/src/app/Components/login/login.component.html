@@ -1,0 +1,30 @@
+
+<div class="login-form">
+  <h3 style="text-align: center;">Giriş Yap</h3>
+  <mat-card class="logo-card">
+  <mat-card-content>
+    <img width="100%" src="/assets/images/kiralaMAX-Logo.png" alt="MSymbolSoruce:https://dribbble.com/shots/12151134-Maximum-logo">
+  </mat-card-content>
+</mat-card>
+    <form [formGroup]="loginForm">
+      <div>
+        <mat-form-field appearance="legacy">
+          <mat-label>E-mail Adresi</mat-label>
+          <input type="email" matInput formControlName="email" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="legacy">
+          <mat-label>Parola</mat-label>
+          <input type="password" matInput formControlName="password" required>
+        </mat-form-field>
+      </div>
+  
+ 
+    </form>
+    <a (click)="openForgotPasswordDialog()">Parolamı unuttum.</a>
+    <div mat-dialog-actions>
+  
+      <button mat-button color="warn" (click)="onNoClick()">İptal</button>
+      <button mat-button [mat-dialog-close]="this.loggedInUserEmail" (click)="login()" cdkFocusInitial color="primary">Giriş Yap</button>
+    </div>

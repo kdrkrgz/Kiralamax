@@ -1,0 +1,88 @@
+.grid-container {
+  margin: 20px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}
+
+.earnings::after {
+  content: "";
+  background: url("/assets/images/money-stock-image.jpg");
+  opacity: 0.2;
+  background-position: center;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: 1;   
+}
+
+.car::after {
+  content: "";
+  background: url("/assets/images/car-stock-image.jpg");
+  opacity: 0.2;
+  background-position: center;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: 1;   
+}
+.customer::after {
+  content: "";
+  background: url("/assets/images/customer-stock-image.jpg");
+  opacity: 0.2;
+  background-position: center;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: 1;   
+}
+
+.statistics-row{
+ display: flex;
+ width: 100%;
+ flex-direction: row;
+ flex-wrap: wrap;
+}
+
+.statistics-header {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  margin: 20px;
+}
+.statistics-header h2 {
+  font-family: fangsong;
+  font-size: x-large;
+
+}
+.statistics-header .statistic{
+  font-family: fangsong;
+  font-size: 70px;
+  font-weight: bolder;
+  margin: 40px;
+}

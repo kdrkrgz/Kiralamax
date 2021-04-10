@@ -1,0 +1,55 @@
+
+<div class="register-form">
+  <h3 style="text-align: center;">Kaydol</h3>
+  <mat-card class="logo-card">
+  <mat-card-content>
+    <img width="100%" src="/assets/images/kiralaMAX-Logo.png" alt="MSymbolSoruce:https://dribbble.com/shots/12151134-Maximum-logo">
+  </mat-card-content>
+</mat-card>
+  <form [formGroup]="registerForm">
+    <div>
+      <div>
+        <mat-form-field appearance="legacy">
+          <mat-label>Ad</mat-label>
+          <input  matInput formControlName="firstName" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="legacy">
+          <mat-label>Soyad</mat-label>
+          <input  matInput formControlName="lastName" required>
+        </mat-form-field>
+      </div>
+      <mat-form-field appearance="legacy">
+        <mat-label>E-mail Adresi</mat-label>
+        <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher" required>
+        <mat-error *ngIf="registerForm.controls['email'].hasError('email') && !registerForm.controls['email'].hasError('required')">
+          Geçerli bir e-mail adresi giriniz.
+        </mat-error>
+        <mat-error *ngIf="registerForm.controls['email'].hasError('maxlength')">
+          E-mail adresi en fazla 32 karakterden oluşabilir.
+        </mat-error>
+        <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+          E-mail alanı <strong>zorunludur</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Parola</mat-label>
+        <input type="password" matInput formControlName="password" minlength="6" [errorStateMatcher]="matcher" required>
+        <mat-error *ngIf="registerForm.controls['password'].hasError('minlength') && !registerForm.controls['password'].hasError('required') && !registerForm.controls['password'].hasError('maxlength') ">
+          Parola en az 6, en fazla 32 karakterden oluşmalıdır.
+        </mat-error>
+        <mat-error *ngIf="registerForm.controls['password'].hasError('required')">
+          Parola alanı <strong>zorunludur</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+  </form>
+  <div mat-dialog-actions>
+
+    <button mat-button color="warn" (click)="onNoClick()">İptal</button>
+    <button mat-button [mat-dialog-close]="" (click)="register()" cdkFocusInitial color="primary">Kaydol</button>
+  </div>

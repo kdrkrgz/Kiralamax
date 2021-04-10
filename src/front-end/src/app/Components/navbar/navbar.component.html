@@ -1,0 +1,50 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar><img width="100%" src="/assets/images/kiralaMAX-Logo.png" alt="MSymbolSoruce:https://dribbble.com/shots/12151134-Maximum-logo"/></mat-toolbar>
+    <mat-nav-list>
+      <a *ngIf="this.isUserAdmin" mat-list-item routerLink="/dashboard">Raporlar</a>
+      <a *ngIf="this.isUserAdmin" mat-list-item routerLink="/categories">Kategori Yönetimi</a>
+      <a mat-list-item routerLink="/cars">Araçlar</a>
+      <a *ngIf="this.isUserAdmin" mat-list-item routerLink="/rentals">Kiralamalar</a>
+      <a *ngIf="this.isUserAdmin" mat-list-item routerLink="/users">Kullanıcı Yönetimi</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>      
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Yeni Nesil Araç Kiralama Yönetimi</span>
+      <span class="flex-expand"></span>
+      <a *ngIf="!isAuthenticated" mat-button href="javascript:void()" (click)="openLoginDialog()" > Giriş Yap</a>
+      <a *ngIf="!isAuthenticated" mat-button href="javascript:void()" (click)="openRegisterDialog()" > Kayıt Ol</a>
+
+      <div *ngIf="isAuthenticated && loggedInUserModel">
+      <button mat-mini-fab class="loggedin-user" [matMenuTriggerFor]="menu">
+        <span class="user-icon" style="color:{{this.randomColor}}">{{this.loggedInUserModel?.email | firstcharacter }}</span>
+      </button>
+ 
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>{{this.loggedInUserModel?.email}}</button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="openUserUpdateDialog()">Profili Düzenle</button>
+        <button mat-menu-item (click)="logout()">Çıkış Yap</button>
+      </mat-menu>
+    </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    
+<router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

@@ -1,0 +1,51 @@
+<div class="mat-elevation-z8">
+  <div class="filter-area">
+
+    <div class="details-button">
+      <button mat-raised-button (click)="openCategoryAddDialog()" color="primary">
+        <mat-icon>add_box</mat-icon> Kategori Ekle
+      </button>
+    </div>
+    </div>
+
+    <app-loading *ngIf="!isFinished"></app-loading>
+
+  <table mat-table class="full-width-table" matSort aria-label="Categories">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+      <td class="center" mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <!-- CategoryName Column -->
+    <ng-container matColumnDef="categoryName">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>Kategori Adı</th>
+      <td class="center" mat-cell *matCellDef="let row">{{row.categoryName}}</td>
+    </ng-container>
+
+    <!-- Operations Column -->
+    <ng-container matColumnDef="operations">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>İşlemler</th>
+      <td class="center" mat-cell *matCellDef="let row">
+        <section class="operation-buttons">
+          <div class="btn-button-row">
+            <button (click)="getSelectedCategoryData(row)" (click)="openUpdateCategoryDialog()"  matTooltip="Kategoriyi düzenle" mat-mini-fab color="primary">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button matTooltip="Kategoriyi Sil" (click)="deleteCategoryWithConfirm(row.id)" mat-mini-fab color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+
+          </div>
+        </section>
+
+      </td>
+    </ng-container>
+
+    <tr class="center" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row class="center" *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="10"
+    [pageSizeOptions]="[10, 20, 50, 100]">
+  </mat-paginator>
+</div>

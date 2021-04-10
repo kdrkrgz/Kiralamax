@@ -1,0 +1,98 @@
+<div class="car-add-form">
+  <form [formGroup]="carAddFormGroup">
+    <div>
+      <!-- statusFilter Filter -->
+      <mat-form-field appearance="legacy" required>
+        <mat-label>Kategori Seçiniz</mat-label>
+        <mat-select formControlName="categoryId">
+          <mat-option value=" ">Seçiniz</mat-option>
+          <mat-option *ngFor="let category of categories" value="{{category.id}}">{{ category?.categoryName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Marka</mat-label>
+        <input matInput formControlName="brand" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Model</mat-label>
+        <input matInput formControlName="carModel" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy" required>
+        <mat-label>Vites Türü Seçiniz</mat-label>
+        <mat-select formControlName="gear">
+          <mat-option value="Manual">Manuel</mat-option>
+          <mat-option value="Automatic">Otomatik </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy" required>
+        <mat-label>Yakıt Türü Seçiniz</mat-label>
+        <mat-select formControlName="fuelType">
+          <mat-option value="Benzin">Benzin</mat-option>
+          <mat-option value="Dizel">Dizel</mat-option>
+          <mat-option value="Hibrid">Hibrid</mat-option>
+          <mat-option value="Elektrik">Elektrik</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Model Yılı</mat-label>
+        <input matInput formControlName="modelYear" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Motor Hacmi</mat-label>
+        <input matInput formControlName="engineCapacity" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Renk</mat-label>
+        <input matInput formControlName="color" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Günlük Ücret</mat-label>
+        <input matInput formControlName="dailyPrice" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Minimum Findeks Puanı</mat-label>
+        <input matInput formControlName="minCreditScore" required>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <div>
+        <!-- Button calls hidden upload button -->
+        <button mat-button onclick="document.getElementById('upload-photo').click();">Araç Fotoğrafı Ekle</button>
+        <!-- Fetch selected filed on change -->
+        <input #photoPicker id="upload-photo" name="upload-photo" style="display: none;" type="file"
+          (change)="handleFileInput(photoPicker.files)" multiple="multiple" accept="image/*">
+
+      </div>
+      <div>
+        <small>{{photoList ? photoList.length: 0}} Adet fotoğraf seçildi.</small>
+        <ul>
+          <li *ngFor="let photo of photoList">{{photo.name}}</li>
+        </ul>
+      </div>
+    </div>
+  </form>
+  <div mat-dialog-actions>
+
+    <button mat-stroked-button color="warn" (click)="onNoClick()">İptal</button>
+    <button mat-stroked-button [mat-dialog-close]="" (click)="addCar()" cdkFocusInitial color="primary">Kaydet</button>
+  </div>

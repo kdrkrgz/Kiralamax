@@ -1,0 +1,61 @@
+.full-width-table {
+    width: 100%;
+  }
+  
+  section {
+    display: table;
+  }
+  
+  .btn-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  
+  .btn-button-row {
+    display: table-cell;
+  }
+  
+  .btn-button-row .mat-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  
+  .btn-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .btn-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }
+
+  .mat-header-cell {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .mat-header-cell.mat-column-position {
+    direction: rtl;
+}
+.mat-tooltip {
+  margin-top: 2px;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.operation-buttons {
+  display: inline-flex;
+}  
+

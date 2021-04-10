@@ -1,0 +1,23 @@
+<div class="car-add-form">
+  <form [formGroup]="categoryUpdateForm">
+    <div >
+      <mat-form-field appearance="legacy">
+        <mat-label>Kategori No.</mat-label>
+        <input matInput value="{{this.categoryData.id}}" [disabled]="true" required>
+      </mat-form-field>
+    </div>
+    <div >
+      <mat-form-field  appearance="legacy">
+        <mat-label>Kategori Adı</mat-label>
+        <input matInput formControlName="categoryName" [(ngModel)]="this.categoryData.categoryName" required>
+      </mat-form-field>
+    </div>
+
+    <div>
+    </div>
+  </form>
+  <div mat-dialog-actions>
+
+    <button mat-stroked-button color="warn" (click)="onNoClick()">İptal</button>
+    <button mat-stroked-button [mat-dialog-close]="" (click)="updateCategory()" cdkFocusInitial color="primary">Kaydet</button>
+  </div>

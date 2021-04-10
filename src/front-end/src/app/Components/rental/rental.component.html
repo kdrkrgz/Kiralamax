@@ -1,0 +1,132 @@
+<div class="mat-elevation-z8">
+  <div class="filter-area">
+
+    <!-- statusFilter Filter -->
+    <mat-form-field appearance="legacy">
+      <mat-label>Kiralama Durumu Seçiniz</mat-label>
+      <mat-select [(value)]="rentIsFinishedFilter" (selectionChange)="rentStatusFilter(rentIsFinishedFilter)">    
+        <mat-option value="">Tümü</mat-option>
+        <mat-option value="continued">Kiralaması Devam Edenler</mat-option>
+        <mat-option value="finished">Kiralaması Bitenler</mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+
+    <app-loading *ngIf="!isFinished"></app-loading>
+
+  <table mat-table class="full-width-table" matSort aria-label="Rentals">
+    <!-- Id Column -->
+    <ng-container matColumnDef="rentId">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+      <td class="center" mat-cell *matCellDef="let row">{{row.rentId}}</td>
+    </ng-container>
+
+
+    <!-- Brand Column -->
+    <ng-container matColumnDef="carBrand">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>Araç Markası</th>
+      <td class="center" mat-cell *matCellDef="let row">{{row.carBrand}}</td>
+    </ng-container>
+
+    <!-- Model Column -->
+    <ng-container matColumnDef="carModel">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>Araç Modeli</th>
+      <td class="center" mat-cell *matCellDef="let row">{{row.carModel}}</td>
+    </ng-container>
+
+    <!-- Customer Name Column -->
+
+    <ng-container matColumnDef="customerName">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>Müşteri Adı</th>
+      <td class="center" mat-cell *matCellDef="let row">{{row.customerName}}</td>
+    </ng-container>
+    <!-- Customer Lastname Column -->
+
+    <ng-container matColumnDef="customerLastName">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>Müşteri Soyadı</th>
+      <td class="center" mat-cell *matCellDef="let row">{{row.customerLastName | uppercase}}</td>
+    </ng-container>
+
+    <!-- RentDate Column -->
+    <ng-container matColumnDef="rentDate">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>Kiralama Tarihi</th>
+      <td class="center" mat-cell *matCellDef="let row">{{row.rentDate | date:'dd/MM/yyyy' }}</td>
+    </ng-container>
+
+    <!-- Return Date Column -->
+    <ng-container matColumnDef="returnDate">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>Geri Dönüş Tarihi</th>
+      <td class="center" mat-cell *matCellDef="let row">{{row.returnDate| date:'dd/MM/yyyy' }}</td>
+    </ng-container>
+
+    <!-- Total Date Column -->
+    <ng-container matColumnDef="totalRentDays">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>Toplam Kiralama Süresi</th>
+      <td class="center" mat-cell *matCellDef="let row">{{row.totalRentDays }}</td>
+    </ng-container>
+
+    <!-- DailyPrice Column -->
+    <ng-container matColumnDef="dailyPrice">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>Günlük Ücret</th>
+      <td class="center" mat-cell *matCellDef="let row">{{row.dailyPrice | currency:'':'':'1.0-2'|tryPipe:"TL" }}</td>
+    </ng-container>
+
+    <!-- Total Price Column -->
+    <ng-container matColumnDef="totalPrice">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>Toplam Ücret</th>
+      <td class="center" mat-cell *matCellDef="let row">{{row.totalPrice |currency:'':'':'1.0-2'|tryPipe:"TL" }}</td>
+    </ng-container>
+
+    <!-- Total Price with Vat Column -->
+    <ng-container matColumnDef="vatTotalPrice">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>KDV Dahil Toplam Ücret</th>
+      <td class="center" mat-cell *matCellDef="let row">{{row.totalPrice | vatAdded:18 |currency:'':'':'1.0-2'|tryPipe:"TL"  }}</td>
+    </ng-container>
+
+        <!-- RentStatus Column -->
+        <ng-container matColumnDef="isFinished">
+          <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>Kiralama Durumu</th>
+          <td class="center" mat-cell *matCellDef="let row">
+            <button *ngIf="row.isFinished" matTooltip="Kiralamayı Bitmiş" mat-mini-fab class="success-button">
+            <mat-icon>done</mat-icon>
+          </button>
+          <button *ngIf="!row.isFinished" matTooltip="Kiralama Devam Ediyor" mat-mini-fab color="warn">
+            <mat-icon>access_time</mat-icon>
+          </button>
+        </td>
+        </ng-container>
+
+
+    <!-- Operations Column -->
+    <ng-container matColumnDef="operations">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>İşlemler</th>
+      <td class="center" mat-cell *matCellDef="let row">
+        <section class="operation-buttons">
+          <div class="btn-button-row">
+            <!-- <button mat-raised-button color="primary">Kirala</button> -->
+            <button *ngIf="!row.isFinished; else rentAlreadyFinished" (click)="complateRentalWithConfirm(row.carId)" matTooltip="Kiralamayı Bitir" mat-mini-fab color="primary">
+              <mat-icon>done_all</mat-icon>
+            </button>
+            <ng-template #rentAlreadyFinished>
+              <button  matTooltip="Kiralama Tamamlanmış" mat-mini-fab color="primary" disabled>
+              <mat-icon>done_all</mat-icon>
+            </button>
+          </ng-template>
+            <button matTooltip="Kiralamayı Sil" (click)="deleteRentalWithConfirm(row.rentId)" mat-mini-fab color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+
+          </div>
+        </section>
+
+      </td>
+    </ng-container>
+
+    <tr class="center" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row class="center" *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="10"
+    [pageSizeOptions]="[10, 20, 50, 100]">
+  </mat-paginator>
+</div>

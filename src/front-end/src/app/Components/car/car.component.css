@@ -1,0 +1,164 @@
+.full-width-table {
+  width: 100%;
+}
+
+/* section {
+  display: table;
+} */
+
+.btn-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+/* .btn-button-row {
+  display: table-cell;
+} */
+
+.btn-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.btn-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.btn-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+.mat-header-cell {
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.center {
+  text-align: center !important;
+}
+
+.mat-header-cell.mat-column-position {
+  direction: rtl;
+}
+.mat-tooltip {
+margin-top: 2px;
+}
+
+
+:host ::ng-deep .mat-sort-header-container {
+display: flex;
+justify-content: center;
+text-align: center;
+}
+
+tr.car-detail-row {
+height: 0;
+}
+
+
+.car-element-row td {
+border-bottom-width: 0;
+}
+
+.car-element-detail { /* will update */
+overflow: hidden;
+display: flex;
+height: auto;
+max-height: 450px;
+}
+
+mat-grid-tile {
+background: lightblue !important;
+}
+
+.car-photos-list {
+display: inline-flex;
+}
+
+.car-photos-list li {
+list-style: none;
+}
+
+.cover-photo {
+display: block;
+margin-right: auto;
+margin-left: auto;
+max-width: 100%;
+max-height: 132px;
+max-width: 170px;
+}
+
+.expand-menu {
+}
+
+.dot {
+height: 15px;
+width: 15px;
+border-radius: 50%;
+display: inline-block;
+border: 1px solid #a09898;
+vertical-align: middle;
+}
+
+.search-area{
+  display: inline-block;
+}
+
+.details-button{
+display: inline-block;
+float: right;
+}
+
+.mat-raised-button {margin-right: 10px;}
+
+.car-photos-list {
+  display: contents  !important;
+  text-align: center;
+  list-style: inside;
+  margin-top: 5px;
+}
+
+.car-photos-list li{
+  display: inline;
+}
+
+.car-photos-area {
+  margin-top: 6px;
+  overflow-x: auto;
+  max-width: 250px;
+  max-height: 50px;
+}
+
+.photo-table{
+  display: inline-flex;
+}
+
+.car-detail-table {
+  display: inline-flex;
+  height: 200px;
+  vertical-align: bottom;
+  margin-left: 25px;
+}
+
+.car-detail-table  table, th, td {
+  border-collapse: collapse;
+  text-align: left;
+}
+.car-detail-table th, .car-data-dimension {
+  padding: 15px;
+  text-align: center;
+}
+
+
+.car-detail-table th {
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.car-detail-table td {
+  border: 1px solid rgba(0,0,0,0.1);
+}

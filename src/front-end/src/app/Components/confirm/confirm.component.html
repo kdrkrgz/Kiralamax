@@ -1,0 +1,16 @@
+
+<div class="register-form">
+  <h3 style="text-align: center;">Onay</h3>
+
+     <div>
+      <div>
+        {{this.confirmModel.title}} işlemini onaylıyormusunuz ?
+      </div>
+      </div>
+
+  <div mat-dialog-actions>
+
+    <button mat-button color="warn" (click)="onNoClick()">İptal</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Onayla</button>
+    
+  </div>

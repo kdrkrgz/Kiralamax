@@ -1,0 +1,44 @@
+<div class="car-add-form">
+  <form [formGroup]="userUpdateForm">
+    <div *ngIf="this.isUserAdmin">
+      <mat-form-field appearance="legacy">
+        <mat-label>Müşteri No.</mat-label>
+        <input matInput formControlName="customerId" value="{{this.userData.customerId}}" [disabled]="true" required>
+      </mat-form-field>
+    </div>
+    <div *ngIf="this.isUserAdmin">
+      <mat-form-field  appearance="legacy">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email" [(ngModel)]="this.userData.email" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>İsim</mat-label>
+        <input matInput formControlName="firstName" [(ngModel)]="this.userData.firstName" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Soyisim</mat-label>
+        <input matInput formControlName="lastName" [(ngModel)]="this.userData.lastName" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Şirket Adı</mat-label>
+        <input matInput formControlName="companyName" [(ngModel)]="this.userData.companyName" required>
+      </mat-form-field>
+    </div>
+    <div *ngIf="this.isUserAdmin">
+        <mat-checkbox matInput formControlName="status" [(ngModel)]="this.userData.status" required>Aktiflik Durumu</mat-checkbox>
+    </div>
+    <div>
+    </div>
+  </form>
+  <button *ngIf="this.isUserAdmin" mat-stroked-button (click)="openOperationsClaimsDialog()">Kullanıcı Rolleri</button>
+  <div mat-dialog-actions>
+
+    <button mat-stroked-button color="warn" (click)="onNoClick()">İptal</button>
+    <button mat-stroked-button [mat-dialog-close]="" (click)="updateUser()" cdkFocusInitial color="primary">Kaydet</button>
+  </div>

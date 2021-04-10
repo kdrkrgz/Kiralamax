@@ -1,0 +1,41 @@
+<div class="car-add-form">
+  <form [formGroup]="userClaimsForm">
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Kullanıcı Id</mat-label>
+        <input matInput value="{{this.userData.id}}" required [disabled]="true">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Kullanıcı E-mail</mat-label>
+        <input matInput value="{{this.userData.email}}" required [disabled]="true">
+      </mat-form-field>
+    </div>
+    <!-- <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Roller</mat-label>
+        <input matInput formControlName="claims" required>
+      </mat-form-field>
+    </div> -->
+    <!-- Multi select role  -->
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Roller</mat-label>
+        <mat-select [formControl]="claims" multiple>
+          <mat-select-trigger>
+            {{userClaims?.length > 0 ? availableUserClaims[0].name : ''}}
+            <span  *ngIf="claims.value?.length > 1">
+              (+{{claims.value.length - 1}} tane daha)
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let userClaim of userClaims" [value]="userClaim.id">{{userClaim.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+  <div mat-dialog-actions>
+
+    <button mat-stroked-button color="warn" (click)="onNoClick()">İptal</button>
+    <button mat-stroked-button [mat-dialog-close]="" (click)="updateUserClaims()" cdkFocusInitial color="primary">Kaydet</button>
+  </div>

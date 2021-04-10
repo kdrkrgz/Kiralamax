@@ -1,0 +1,95 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Raporlar</h1>
+  <mat-grid-list cols="2" rowHeight="350px">
+    <!-- <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{card.title}}
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item>Expand</button>
+              <button mat-menu-item>Remove</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div>Araç Sayısı: {{this.carCount}}</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile> -->
+    <!-- card 1 -->
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card class="car dashboard-card">
+        <mat-card-header>
+          <mat-card-title> Araç İstatistikleri </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div>
+            <div class="statistics-row">
+              <div class="statistics-header">
+                <h2>Toplam Araç Sayısı</h2>
+                <span class="statistic">{{ this.carCount }}</span>
+              </div>
+              <div class="statistics-header">
+                <h2>Boşta Olan Araç Sayısı</h2>
+                <span class="statistic">{{ this.activeCarsCount }}</span>
+              </div>
+            </div>
+
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- card 2 -->
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card class="customer dashboard-card">
+        <mat-card-header>
+          <mat-card-title> Müşteri İstatistikleri </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div class="statistics-row">
+          <div class="statistics-header">
+            <h2>Aktif Müşteriler</h2>
+            <span class="statistic">{{ this.customerCount }}</span>
+        </div>
+      </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- card 3 -->
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <mat-card class="earnings dashboard-card">
+        <mat-card-header>
+          <mat-card-title> Kiralama İstatistikleri </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div class="statistics-row">
+            <div class="statistics-header">
+              <h2>Beklenen Kazanç</h2>
+              <span class="statistic">
+                {{ this.expectedGain }} ₺
+              </span>
+            </div>
+            <div class="statistics-header">
+              <h2>Aktif Kiralamalar</h2>
+              <span class="statistic">
+                {{ this.activeRentalsCount }}
+              </span>
+            </div>
+            <div class="statistics-header">
+              <h2>Bitmiş Kiralamalar</h2>
+              <span class="statistic">
+                {{ this.finishedRentalsCount }}
+              </span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

@@ -1,0 +1,9 @@
+.login-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.logo-card {
+    margin-bottom: 30px;
+}

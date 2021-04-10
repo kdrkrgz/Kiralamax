@@ -1,0 +1,266 @@
+<div class="mat-elevation-z8">
+  <div class="filter-area">
+    <div class="search-area">
+      <!-- Car Search Form -->
+      <mat-form-field appearance="legacy">
+        <mat-label>Araç Modeli Giriniz</mat-label>
+        <input matInput (keyup)="globalFilter(carModelFilter, 'carModel')" placeholder="Araç Modeli"
+          [(ngModel)]="carModelFilter" #input />
+      </mat-form-field>
+
+      <!-- Category Filter -->
+      <mat-form-field appearance="legacy">
+        <mat-label>Bir Kategori Seçiniz</mat-label>
+        <mat-select [(value)]="carCategoryFilter" (selectionChange)="categoryFilter(carCategoryFilter)">
+          <mat-option value="">Seçiniz</mat-option>
+          <mat-option *ngFor="let category of categoryList" value="{{ category.categoryName }}">
+            {{category?.categoryName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Brand Filter -->
+      <mat-form-field appearance="legacy">
+        <mat-label>Bir Marka Seçiniz</mat-label>
+        <mat-select [(value)]="carBrandFilter" (selectionChange)="globalFilter(carBrandFilter, 'brand')">
+          <mat-option value="">Seçiniz</mat-option>
+          <mat-option *ngFor="let brand of brandList" value="{{ brand.name }}">{{ brand?.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Transmission Filter -->
+      <mat-form-field appearance="legacy">
+        <mat-label>Bir Vites Türü Seçiniz</mat-label>
+        <mat-select [(value)]="carTransmissionFilter" (selectionChange)="globalFilter(carTransmissionFilter, 'gear')">
+          <mat-option value="">Seçiniz</mat-option>
+          <mat-option *ngFor="let transmission of transmissionList" value="{{ transmission.name }}">
+            {{ transmission?.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Fuel Type Filter -->
+      <mat-form-field appearance="legacy">
+        <mat-label>Bir Yakıt Türü Seçiniz</mat-label>
+        <mat-select [(value)]="carFuelTypeFilter" (selectionChange)="globalFilter(carFuelTypeFilter, 'fuelType')">
+          <mat-option value="">Seçiniz</mat-option>
+          <mat-option *ngFor="let fuelType of fuelTypeList" value="{{ fuelType.name }}">
+            {{ fuelType?.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="details-button">
+      <a *ngIf="this.isUserAdmin" mat-raised-button href="javascript:void()" (click)="openCarAddDialog()"
+        color="primary">
+        <mat-icon>add_box</mat-icon> Araç Ekle
+      </a>
+    </div>
+  </div>
+
+  <app-loading *ngIf="!isFinished"></app-loading>
+
+  <!-- Data Table -->
+  <table mat-table class="full-width-table" matSort aria-label="Cars" multiTemplateDataRows>
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>
+        No.
+      </th>
+      <td class="center" mat-cell *matCellDef="let row">{{ row.id }}</td>
+    </ng-container>
+
+    <!-- Cateroy Column -->
+    <ng-container matColumnDef="category">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>
+        Kategori
+      </th>
+      <td class="center" mat-cell *matCellDef="let row">
+        {{ row.category.categoryName }}
+      </td>
+    </ng-container>
+
+    <!-- Brand Column -->
+    <ng-container matColumnDef="brand">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>
+        Marka
+      </th>
+      <td class="center" mat-cell *matCellDef="let row">{{ row.brand }}</td>
+    </ng-container>
+
+    <!-- Model Column -->
+    <ng-container matColumnDef="carModel">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>
+        Model
+      </th>
+      <td class="center" mat-cell *matCellDef="let row">{{ row.carModel }}</td>
+    </ng-container>
+
+    <!-- Gear Column -->
+    <ng-container matColumnDef="gear">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>
+        Vites
+      </th>
+      <td class="center" mat-cell *matCellDef="let row">{{ row.gear }}</td>
+    </ng-container>
+
+    <!-- Gear Column -->
+    <ng-container matColumnDef="fuelType">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>
+        Yakıt Türü
+      </th>
+      <td class="center" mat-cell *matCellDef="let row">{{ row.fuelType }}</td>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="color">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>
+        Renk
+      </th>
+      <td class="center" mat-cell *matCellDef="let row">
+        {{ row.color }}
+        <span class="dot" [style.background-color]="row.color"></span>
+      </td>
+    </ng-container>
+
+    <!-- DailyPrice Column -->
+    <ng-container matColumnDef="dailyPrice">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>
+        Günlük Ücret
+      </th>
+      <td class="center" mat-cell *matCellDef="let row">
+        {{ row.dailyPrice | currency: "":"":"1.0-2" | tryPipe: "TL" }}
+      </td>
+    </ng-container>
+
+    <!--  Minimum Credit Score Column -->
+    <ng-container matColumnDef="minCreditScore">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>
+        Findeks Puanı
+      </th>
+      <td class="center" mat-cell *matCellDef="let row">
+        {{ row.minCreditScore }}
+      </td>
+    </ng-container>
+
+    <!-- isRented Column -->
+    <ng-container matColumnDef="isRented">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>
+        Durum
+      </th>
+      <td class="center" mat-cell *matCellDef="let row">
+        <button *ngIf="row.isRented" matTooltip="Araç Şu an Kiralanamaz" mat-mini-fab color="warn">
+          <mat-icon>not_interested</mat-icon>
+        </button>
+        <button *ngIf="!row.isRented" matTooltip="Araç Kiralanabilir" class="success-button" mat-mini-fab>
+          <mat-icon>done</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Operations Column -->
+    <ng-container matColumnDef="operations">
+      <th class="center" mat-header-cell *matHeaderCellDef mat-sort-header>
+        İşlemler
+      </th>
+      <td class="center" mat-cell *matCellDef="let row">
+        <section>
+          <div class="btn-button-row">
+            <!-- <button mat-raised-button color="primary">Kirala</button> -->
+            <button (click)="row.isExpanded = true" *ngIf="!row.isRented && this.isAuthenticated; else rentNotValid"
+              matTooltip="Aracı Kirala" mat-mini-fab color="primary" (click)="getRowCarData(row)"
+              (click)="openRentDialog()">
+              <mat-icon>add_box</mat-icon>
+            </button>
+            <ng-template #rentNotValid>
+              <span matTooltip="Kirlama yapabilmek için giriş yapmalısınız."
+                [matTooltipDisabled]="this.isAuthenticated">
+                <button matTooltip="Aracı Kiralanamaz" mat-mini-fab color="primary" disabled>
+                  <mat-icon>add_box</mat-icon>
+                </button>
+              </span>
+            </ng-template>
+            <button *ngIf="this.isUserAdmin" (click)="row.isExpanded = true" matTooltip="Aracı Sil" mat-mini-fab
+              color="warn" (click)="deleteCategoryWithConfirm(row.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </section>
+      </td>
+    </ng-container>
+
+    <!-- Details row -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let car" [attr.colspan]="displayedColumns.length">
+        <div class="row car-element-detail" [@detailExpand]="car.isExpanded ? 'expanded' : 'collapsed'">
+          <div>
+            <mat-list class="expand-menu">
+              <div mat-subheader>
+                {{ car.id }} Nolu &nbsp;<b>
+                  {{ car.brand }} {{ car.carModel }} </b>&nbsp; Marka Araç için Detaylar
+              </div>
+              <div class="photo-table">
+                <table>
+                  <tr>
+                    <td>
+                      <mat-card *ngIf="car.photos?.length > 0">
+                        <div style="min-height: 132px;">
+                          <!-- aktif foto component içinde global geliyor. -->
+                          <img class="cover-photo" *ngIf="activePhotoPath; else defaultCover"
+                            src="https://localhost:5001/{{ activePhotoPath }}" (click)="showGallery()" />
+                          <ng-template #defaultCover>
+                            <img class="cover-photo" src="https://localhost:5001/{{ car.photos[0].path }}"
+                              (click)="showGallery()" />
+                          </ng-template>
+                        </div>
+                        <div class="car-photos-area">
+                          <ul class="car-photos-list">
+                            <li *ngFor="let photo of car.photos; let index = index">
+                              <img src="https://localhost:5001/{{ photo.path }}" width="50" height="50"
+                                style="margin-right: 2px;" (click)="getActiveCarPhoto(photo.path, index, car.photos)
+                            " />
+                            </li>
+                          </ul>
+                        </div>
+                      </mat-card>
+                    </td>
+
+                  </tr>
+                </table>
+              </div>
+              <div class="car-detail-table">
+                <table>
+                  <tr>
+                    <th>Araç Modeli</th>
+                    <th>Günlük Ücret</th> 
+                    <th>Vites Tipi</th>
+                    <th>Motor Hacmi</th> 
+                    <th>Model Yılı</th>
+                  </tr>
+                  <tr>
+                    <td class="car-data-dimension">{{ car.carModel }}</td>
+                    <td class="car-data-dimension">{{ car.dailyPrice | number: '1.0-0':'en-US' }} ₺</td>
+                    <td class="car-data-dimension">{{ car.gear }}</td>
+                    <td class="car-data-dimension">{{ car.engineCapacity | number: '1.0-0':'en-US'  }} CC</td>
+                    <td class="car-data-dimension">{{ car.modelYear }}</td>
+                  </tr>
+                </table>
+              </div>
+            </mat-list>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+    <!-- End Details row -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns" class="car-element-row"
+      [class.car-expanded-row]="row.isExpanded" href="javascript:void()" (click)="row.isExpanded = !row.isExpanded">
+    </tr>
+
+    <!-- Extra row to show detail content column -->
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="car-detail-row"></tr>
+  </table>
+
+  <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20, 50, 100]">
+  </mat-paginator>
+</div>

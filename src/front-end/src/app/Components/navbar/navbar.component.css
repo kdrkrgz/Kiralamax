@@ -1,0 +1,35 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.flex-expand {
+  flex: 1 1 auto;
+}
+
+.loggedin-user{
+  background-color: #ffffff;
+}
+
+
+.user-icon{
+  font-size: 20px !important;
+  font-weight: bolder;
+  /* color: mediumvioletred; */
+
+}
+
+

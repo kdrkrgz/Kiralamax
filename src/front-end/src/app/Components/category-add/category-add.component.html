@@ -1,0 +1,17 @@
+<div class="car-add-form">
+  <form [formGroup]="categoryAddForm">
+    <div >
+      <mat-form-field  appearance="legacy">
+        <mat-label>Kategori Adı</mat-label>
+        <input matInput formControlName="categoryName" required>
+      </mat-form-field>
+    </div>
+
+    <div>
+    </div>
+  </form>
+  <div mat-dialog-actions>
+
+    <button mat-stroked-button color="warn" (click)="onNoClick()">İptal</button>
+    <button mat-stroked-button [mat-dialog-close]="" (click)="addCategory()" cdkFocusInitial color="primary">Kaydet</button>
+  </div>
