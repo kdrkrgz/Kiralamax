@@ -11,7 +11,7 @@ namespace CarRental.Business.ValidationRules.FluentValidation
         public CustomerValidator()
         {
             RuleFor(x => x.AppUser).NotNull();
-            RuleFor(x => x.CompanyName).MinimumLength(2).NotEmpty();
+            //RuleFor(x => x.CompanyName).MinimumLength(2).NotEmpty();
         }
     }
 }

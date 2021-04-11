@@ -20,7 +20,7 @@ using log4net.DateFormatter;
 
 namespace CarRental.Business.Concrete
 {
-    public class AuthManager : IAuthService // 3:44:05 TODO: AuthManager Yazılacak
+    public class AuthManager : IAuthService
     {
         private IUserService _userService;
         private ITokenHelper _tokenHelper;

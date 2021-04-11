@@ -4,14 +4,16 @@ using CarRental.DataAccess.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRental.DataAccess.Migrations
 {
     [DbContext(typeof(CarRentalDbContext))]
-    partial class CarRentalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210410203713_data-seed")]
+    partial class dataseed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,26 +110,6 @@ namespace CarRental.DataAccess.Migrations
                     b.HasIndex("OperationClaimId");
 
                     b.ToTable("UserOperationClaims");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            OperationClaimId = 1,
-                            id = 1
-                        },
-                        new
-                        {
-                            UserId = 1,
-                            OperationClaimId = 2,
-                            id = 2
-                        },
-                        new
-                        {
-                            UserId = 1,
-                            OperationClaimId = 3,
-                            id = 3
-                        });
                 });
 
             modelBuilder.Entity("CarRental.Entities.Entities.Car", b =>
@@ -240,14 +222,6 @@ namespace CarRental.DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AppUserId = 1,
-                            CompanyName = "KiralaMAX"
-                        });
                 });
 
             modelBuilder.Entity("CarRental.Entities.Entities.Photo", b =>
@@ -315,20 +289,6 @@ namespace CarRental.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("AppUser");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ActivationCode = new Guid("7abaed77-7ee2-49f6-9574-391a92b74e36"),
-                            Email = "admin@kiralamax.com",
-                            FirstName = "Admin",
-                            LastName = "Admin",
-                            PasswordHash = new byte[] { 13, 212, 118, 83, 83, 220, 1, 221, 155, 165, 184, 84, 20, 65, 132, 28, 229, 140, 170, 248, 9, 78, 54, 4, 17, 131, 94, 84, 106, 68, 21, 74, 171, 250, 66, 145, 252, 234, 89, 193, 140, 99, 182, 78, 245, 196, 5, 141, 45, 86, 63, 105, 2, 49, 175, 246, 249, 83, 133, 79, 212, 41, 118, 29 },
-                            PasswordSalt = new byte[] { 204, 244, 142, 253, 255, 133, 143, 64, 185, 20, 79, 69, 178, 227, 183, 158, 251, 13, 77, 77, 6, 90, 215, 212, 212, 116, 166, 232, 130, 144, 196, 4, 166, 218, 17, 217, 67, 84, 15, 217, 91, 249, 210, 139, 96, 173, 3, 81, 167, 36, 181, 124, 161, 107, 92, 87, 243, 142, 159, 188, 192, 83, 1, 26, 64, 49, 75, 223, 74, 224, 154, 152, 181, 232, 136, 9, 134, 131, 98, 96, 240, 179, 129, 223, 168, 78, 83, 92, 7, 155, 82, 177, 162, 33, 227, 210, 13, 131, 214, 148, 219, 21, 142, 96, 203, 220, 136, 43, 165, 220, 38, 225, 116, 60, 158, 25, 232, 185, 197, 123, 26, 255, 57, 220, 178, 232, 91, 85 },
-                            Status = true,
-                            CustomerId = 1
-                        });
                 });
 
             modelBuilder.Entity("CarRental.Core.Entities.Concrete.UserOperationClaim", b =>

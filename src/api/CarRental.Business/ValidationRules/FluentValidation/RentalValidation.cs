@@ -10,8 +10,20 @@ namespace CarRental.Business.ValidationRules.FluentValidation
     {
         public RentalValidation()
         {
-            RuleFor(x => x.ReturnDate);
+            RuleFor(x => x.RentDate).NotNull().NotEmpty();
+            RuleFor(x => x.ReturnDate).NotNull().NotEmpty();
+            RuleFor(x => x.Car).NotNull().NotEmpty();
+            RuleFor(x => x.Customer).NotNull().NotEmpty();
         }
-        // TODO: Validations Ruleslar yazılmaya devam edilecek
+
+        private bool CompareDates(DateTime rentDate, DateTime returnDate)
+        {
+            if (returnDate < rentDate)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

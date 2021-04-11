@@ -12,7 +12,6 @@ namespace CarRental.Business.ValidationRules.FluentValidation
         {
             RuleFor(x => x.Customer).NotNull();
             RuleFor(x => x.Email).EmailAddress();
-            RuleFor(x => x.FirstName).MinimumLength(2).NotEmpty().NotNull().Must(StartsWithA).WithMessage("Müşteri ismi \"A\" ile başlamalı");
             RuleFor(x => x.LastName).MinimumLength(2).NotEmpty().NotNull();
         }
 

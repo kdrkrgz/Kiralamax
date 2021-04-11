@@ -32,7 +32,7 @@ namespace CarRental.DataAccess.DbContexts
             modelBuilder.ApplyConfiguration(new CustomerConfigurations());
             modelBuilder.ApplyConfiguration(new UserOperationClaimConfigurations());
 
-            //TODO: Data Seeds Here
+            modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);
         }
     }

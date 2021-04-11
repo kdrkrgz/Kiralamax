@@ -66,7 +66,6 @@ namespace CarRental.Business.Concrete
             var category = GetAddedCarCategory(car.CategoryId);
             car.CategoryId = category.Data.Id;
             car.Category = category.Data;
-            //TODO photo tarafına addrangeli add metod // ve geri dön photolist liste şeklinde
             _carDal.Add(car);
 
             AddPhotoToCar(carImages, car.Brand + " " + car.CarModel, car); // böyle bir araç yoking hatası fırlatacak kesin
