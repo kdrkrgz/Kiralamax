@@ -59,13 +59,12 @@ export class RentalAddComponent implements OnInit {
     private creditCardService: CreditCardService,
     private confirmService: ConfirmService,
     private jwtTokenService: JwtTokenService) {
-    this.getUserAuthority();
     this.rentAddFormData = new FormData();
   }
 
 
   ngOnInit() {
-    this.getCustomers();
+    this.getUserAuthority();
     this.createAllForms();
   }
 
@@ -202,7 +201,7 @@ export class RentalAddComponent implements OnInit {
 
 
   getCustomers() {
-    if (this.isUserAdmin) {
+    if (!this.isUserAdmin) {
       this.customers.push(this.activeCustomer)
     }
     else {
@@ -270,6 +269,7 @@ export class RentalAddComponent implements OnInit {
   getUserAuthority() {
     if (this.jwtTokenService.checkUserAuthority(["admin", "system.admin"]) == true) {
       this.isUserAdmin = true
+      this.getCustomers();
     }
     else {
       this.isUserAdmin = false
