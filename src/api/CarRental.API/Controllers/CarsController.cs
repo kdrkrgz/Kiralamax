@@ -48,6 +48,7 @@ namespace CarRental.API.Controllers
                 var carImages = Request.Form.Files;
                 foreach (var file in carImages)
                 {
+                    // TODO: Filename edit
                     // upload request form files to under "wwwroot/Images/CarImages" folder and return saving db paths
                     var dbPath = FileUploadHelper.UploadFile(file,"wwwroot", "Images\\CarImages");
                     imagePaths.Add(dbPath);
@@ -81,11 +82,23 @@ namespace CarRental.API.Controllers
         public IActionResult Delete(int id)
         {
             var result = _carManager.DeleteByCarId(id);
-            if (result.IsSuccess)
+            if (!result.IsSuccess)
             {
-                return Ok(result);
+                return BadRequest(result);
             }
-            return BadRequest(result);
+            return Ok(result);
+            
+        }
+
+        [HttpDelete("deletecarphoto/{id}")]
+        public IActionResult DeleteCarPhoto(int id)
+        {
+            var result = _carManager.DeleteCarPhoto(id);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
     }
 }

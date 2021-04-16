@@ -68,7 +68,15 @@ namespace CarRental.Business.Concrete
         {
             _photoDal.RemoveRange(carPhotos);
             return new SuccessResult(Message.GeneralSuccessfull);
+        }
 
+        [CacheRemoveAspect("IPhotoService.Get")]
+        [LogAspect(typeof(FileLogger))]
+        public IResult DeleteCarPhotoById(int photoId)
+        {
+            var photoResult = _photoDal.Get(x => x.Id == photoId);
+            _photoDal.Delete(photoResult);
+            return new SuccessResult(Message.CarPhotoDeleted);
         }
     }
 }

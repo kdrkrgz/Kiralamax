@@ -40,6 +40,10 @@ export class CarService {
   AddCar(formData:FormData):Observable<ResponseModel> {
     return this.httpClient.post<ResponseModel>(this.baseUrl + "cars", formData)
   }
+
+  DeleteCarPhoto(photoId:number):Observable<ResponseModel> {   
+    return this.httpClient.delete<ResponseModel>((this.baseUrl + "cars/deletecarphoto/"+ photoId));
+  }
 }
 
 

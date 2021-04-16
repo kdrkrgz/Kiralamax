@@ -30,28 +30,28 @@ namespace CarRental.Business.Concrete
             _photoService = photoService;
         }
 
-        [CacheAspect]
+        //[CacheAspect]
         [LogAspect(typeof(FileLogger))]
         public IDataResult<List<Car>> GetAllCarsWithDetails()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetCarsWithDetails());
         }
 
-        [CacheAspect]
+        //[CacheAspect]
         [LogAspect(typeof(FileLogger))]
         public IDataResult<Car> GetCarWithDetails(int id)
         {
             return new SuccessDataResult<Car>(_carDal.GetCarWithDetails(id));
         }
 
-        [CacheAspect]
+        //[CacheAspect]
         [LogAspect(typeof(FileLogger))]
         public IDataResult<Car> GetCar(int id)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id));
         }
 
-        [CacheAspect]
+        //[CacheAspect]
         [LogAspect(typeof(FileLogger))]
         public IDataResult<List<Car>> GetAllCars()
         {
@@ -128,6 +128,20 @@ namespace CarRental.Business.Concrete
                 return new SuccessResult(Message.CarDeleted);
             }
             return new ErrorResult(Message.CarDeleteFailed);
+        }
+
+        [TransactionScopeAspect]
+        [SecuredOperation("admin,car.add")]
+        [CacheRemoveAspect("ICarService.Get")]
+        [CacheRemoveAspect("ICarService.GetAllCarsWithDetails")]
+        public IResult DeleteCarPhoto(int photoId)
+        {
+            var result = _photoService.DeleteCarPhotoById(photoId);
+            if (result.IsSuccess)
+            {
+                return new SuccessResult(Message.CarPhotoDeleted);
+            }
+            return new ErrorResult(Message.CarPhotoDeleteFailed);
         }
     }
 }

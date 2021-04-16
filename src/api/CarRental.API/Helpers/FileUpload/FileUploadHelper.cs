@@ -10,7 +10,7 @@ namespace CarRental.API.Helpers.FileUpload
 {
     public static class FileUploadHelper
     {
-
+        // FileName Updates
         public static string UploadFile(IFormFile file, string folder, string subFolder)
         {
             var folderName = Path.Combine(folder, subFolder);

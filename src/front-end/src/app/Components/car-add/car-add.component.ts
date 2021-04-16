@@ -50,7 +50,6 @@ export class CarAddComponent implements OnInit {
       dailyPrice: ['', Validators.required],
       minCreditScore: ['', Validators.required]
     });
-    console.log(this.carAddFormGroup);
     
   }
 

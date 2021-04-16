@@ -21,57 +21,58 @@ namespace CarRental.Business.Constants
         public const string CarRentComplateFailed ="Kiralama sonlandırılamadı.";
         public const string CarRentComplated = "Kiralama başarıyla sonlandırıldı.";
 
-
-        public static string CarAdded = "Yeni araç başarıyla eklendi.";
-        public static string CarAddFailed = "Araç eklenirken bir hata oluştu.";
-        public static string CarUpdated = "Araç başarıyla güncellendi.";
-        public static string CarUpdateFailed = "Araç güncellenirken bir hata oluştu.";
-        public static string CarDeleted = "Araç başarıyla silindi.";
-        public static string CarDeleteFailed = "Araç silinirken bir hata oluştu.";
+        public const string CarAdded = "Yeni araç başarıyla eklendi.";
+        public const string CarAddFailed = "Araç eklenirken bir hata oluştu.";
+        public const string CarUpdated = "Araç başarıyla güncellendi.";
+        public const string CarUpdateFailed = "Araç güncellenirken bir hata oluştu.";
+        public const string CarDeleted = "Araç başarıyla silindi.";
+        public const string CarDeleteFailed = "Araç silinirken bir hata oluştu.";
+        public const string CarPhotoDeleted = "Araç fotoğrafı başarıyla silindi.";
+        public const string CarPhotoDeleteFailed = "Araç fotoğrafı başarıyla silindi.";        
                
-        public static string CustomerAdded = "Yeni müşteri başarıyla eklendi.";
-        public static string CustomerAddFailed = "Müşteri eklenirken bir hata oluştu.";
-        public static string CustomerUpdated = "Müşteri başarıyla güncellendi.";
-        public static string CustomerUpdateFailed = "Müşteri güncellenirken bir hata oluştu.";
-        public static string CustomerDeleted = "Müşteri başarıyla silindi.";
-        public static string CustomerDeleteFailed = "Müşteri silinirken bir hata oluştu.";
+        public const string CustomerAdded = "Yeni müşteri başarıyla eklendi.";
+        public const string CustomerAddFailed = "Müşteri eklenirken bir hata oluştu.";
+        public const string CustomerUpdated = "Müşteri başarıyla güncellendi.";
+        public const string CustomerUpdateFailed = "Müşteri güncellenirken bir hata oluştu.";
+        public const string CustomerDeleted = "Müşteri başarıyla silindi.";
+        public const string CustomerDeleteFailed = "Müşteri silinirken bir hata oluştu.";
 
-        public static string CategoryAdded = "Kategori eklendi.";
-        public static string CategoryAddFailed = "Kategori eklenirken bir hata oluştu.";
-        public static string CategoryUpdated = "Kategori güncellendi.";
-        public static string CategoryUpdateFailed = "Kategori güncellenirken bir hata oluştu.";
-        public static string CategoryDeleted = "Kategori silindi.";
-        public static string CategoryDeleteFailed = "Kategori silinirken bir hata oluştu.";
+        public const string CategoryAdded = "Kategori eklendi.";
+        public const string CategoryAddFailed = "Kategori eklenirken bir hata oluştu.";
+        public const string CategoryUpdated = "Kategori güncellendi.";
+        public const string CategoryUpdateFailed = "Kategori güncellenirken bir hata oluştu.";
+        public const string CategoryDeleted = "Kategori silindi.";
+        public const string CategoryDeleteFailed = "Kategori silinirken bir hata oluştu.";
 
-        public static string CreditCardAdded = "Kredi kartı eklendi.";
-        public static string CreditCardAddFiled = "Kredi kartı eklenemedi.";
-        public static string CreditCardDeleted = "Kredi kartı silindi.";
-        public static string CreditCardDeleteFailed = "Kredi kartı silinemedi.";
+        public const string CreditCardAdded = "Kredi kartı eklendi.";
+        public const string CreditCardAddFiled = "Kredi kartı eklenemedi.";
+        public const string CreditCardDeleted = "Kredi kartı silindi.";
+        public const string CreditCardDeleteFailed = "Kredi kartı silinemedi.";
 
-        public static string UserEmailExist = "Bu e-mail adresiyle daha önce kayıt olunmuş.";
-        public static string AuthorizationFailed = "Bu işlem için gerekli yetkiye sahip değilsiniz.";
-        public static string UserNotFound = "Kullanıcı adı veya parola yanlış.";
-        public static string UserRegistered = "Kullanıcı oluşturuldu.";
-        public static string PasswordError = "Parola hatalı";
-        public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut.";
-        public static string AccessTokenCreated = "Bağlantı tokeni oluşturuldu.";
-        public static string LoginSuccess = "Giriş yapıldı.";
+        public const string UserEmailExist = "Bu e-mail adresiyle daha önce kayıt olunmuş.";
+        public const string AuthorizationFailed = "Bu işlem için gerekli yetkiye sahip değilsiniz.";
+        public const string UserNotFound = "Kullanıcı adı veya parola yanlış.";
+        public const string UserRegistered = "Kullanıcı oluşturuldu.";
+        public const string PasswordError = "Parola hatalı";
+        public const string UserAlreadyExists = "Bu kullanıcı zaten mevcut.";
+        public const string AccessTokenCreated = "Bağlantı tokeni oluşturuldu.";
+        public const string LoginSuccess = "Giriş yapıldı.";
 
-        public static string GeneralSuccessfull = "İşlem başarılı.";
-        public static string GeneralFailed = "İşlem başarısız.";
+        public const string GeneralSuccessfull = "İşlem başarılı.";
+        public const string GeneralFailed = "İşlem başarısız.";
 
-        public static string UserUpdated ="Kullanıcı güncellendi.";
-        public static string UserUpdateFailed = "Kullanıcı güncellenemedi.";
-        public static string UserRolesUpdateError = "Kullanıcı rolleri güncellenemedi.";
-        public static string UserRolesUpdated = "Kullanıcı rolleri güncellendi.";
-        public static string UserDeleted = "Kullanıcı silindi.";
-        public static string UserDeleteFailed = "Kullanıcı silinemedi.";
+        public const string UserUpdated ="Kullanıcı güncellendi.";
+        public const string UserUpdateFailed = "Kullanıcı güncellenemedi.";
+        public const string UserRolesUpdateError = "Kullanıcı rolleri güncellenemedi.";
+        public const string UserRolesUpdated = "Kullanıcı rolleri güncellendi.";
+        public const string UserDeleted = "Kullanıcı silindi.";
+        public const string UserDeleteFailed = "Kullanıcı silinemedi.";
 
-        public static string PasswordResetMailSend ="Parola sıfırlama bağlantısı mail adresinize gönderildi.";
-        public static string PasswordReseted ="Parola başarıyla değiştirildi.";
-        public static string UserNotActivated = "Hesabınız aktif edilmemiş, E-mail adresinize gönderilen bağlantıdan aktifleştirebilirsiniz.";
-        public static string UserActivated = "Hesap başarıyla aktif edildi.";
-        public static string UserActivateFailed = "Hesap aktifleştirilemedi";
+        public const string PasswordResetMailSend ="Parola sıfırlama bağlantısı mail adresinize gönderildi.";
+        public const string PasswordReseted ="Parola başarıyla değiştirildi.";
+        public const string UserNotActivated = "Hesabınız aktif edilmemiş, E-mail adresinize gönderilen bağlantıdan aktifleştirebilirsiniz.";
+        public const string UserActivated = "Hesap başarıyla aktif edildi.";
+        public const string UserActivateFailed = "Hesap aktifleştirilemedi";
 
     }
 

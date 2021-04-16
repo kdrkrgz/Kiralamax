@@ -178,8 +178,12 @@
                 </button>
               </span>
             </ng-template>
+            <button *ngIf="this.isUserAdmin" (click)="row.isExpanded = true" matTooltip="Aracı Düzenle" mat-mini-fab
+            color="primary" (click)="openCarUpdateDialog(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
             <button *ngIf="this.isUserAdmin" (click)="row.isExpanded = true" matTooltip="Aracı Sil" mat-mini-fab
-              color="warn" (click)="deleteCategoryWithConfirm(row.id)">
+              color="warn" (click)="deleteCarWithConfirm(row.id)">
               <mat-icon>delete</mat-icon>
             </button>
           </div>

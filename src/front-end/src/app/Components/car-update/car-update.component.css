@@ -1,0 +1,25 @@
+.car-photos-area {
+    margin-top: 6px;
+    overflow-x: auto;
+    max-width: 250px;
+    max-height: 50px;
+  }
+
+.car-photos-list {
+    display: inline-flex;
+    }
+    
+    .car-photos-list li {
+    list-style: none;
+    }
+
+    .car-photos-list {
+        display: contents  !important;
+        text-align: center;
+        list-style: inside;
+        margin-top: 5px;
+      }
+      
+      .car-photos-list li{
+        display: inline;
+      }

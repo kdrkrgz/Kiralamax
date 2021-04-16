@@ -11,6 +11,7 @@ namespace CarRental.Business.Abstract
         IResult AddCarPhoto(Photo carPhoto);
         IResult UpdateCarPhoto(Photo carPhoto);
         IResult DeleteCarPhoto(Photo carPhoto);
+        IResult DeleteCarPhotoById(int photoId);
 
         IResult AddCarPhotos(List<Photo> carPhotos);
         IResult DeleteCarPhotos(List<Photo> carPhotos);

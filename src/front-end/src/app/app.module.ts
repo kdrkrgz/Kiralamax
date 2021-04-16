@@ -63,6 +63,7 @@ import { LandingPageComponent } from './Components/landing-page/landing-page.com
 import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
 import { AccountActivateComponent } from './Components/account-activate/account-activate.component';
+import { CarUpdateComponent } from './Components/car-update/car-update.component';
 
 
 @NgModule({
@@ -93,7 +94,8 @@ import { AccountActivateComponent } from './Components/account-activate/account-
     LandingPageComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    AccountActivateComponent
+    AccountActivateComponent,
+    CarUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -143,6 +145,7 @@ import { AccountActivateComponent } from './Components/account-activate/account-
     CategoryAddComponent,
     ConfirmComponent,
     ForgotPasswordComponent,
+    CarUpdateComponent
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'legacy' } },

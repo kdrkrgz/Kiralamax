@@ -19,5 +19,6 @@ namespace CarRental.Business.Abstract
         IResult UpdateCar(Car car);
         IResult DeleteCar(Car car);
         IResult DeleteByCarId(int carId);
+        IResult DeleteCarPhoto(int photoId);
     }
 }

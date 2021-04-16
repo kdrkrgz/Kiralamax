@@ -68,7 +68,7 @@ namespace CarRental.API.Extensions
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("Kiralamax.API v1", new OpenApiInfo { Title = "Kiralamax.API", Version = "v1" });
+                c.SwaggerDoc("Kiralamax.API", new OpenApiInfo { Title = "Kiralamax.API", Version = "v1" });
             });
             return services;
         }
