@@ -52,9 +52,9 @@ namespace CarRental.Business.Concrete
             return new SuccessResult(Message.GeneralSuccessfull);
         }
         
-        [TransactionScopeAspect]
-        [SecuredOperation("admin,system.admin")]
-        [LogAspect(typeof(FileLogger))]
+        //[TransactionScopeAspect]
+        //[SecuredOperation("admin,system.admin")]
+        //[LogAspect(typeof(FileLogger))]
         public IResult AddCarPhotos(List<Photo> carPhotos)
         {
             _photoDal.AddRange(carPhotos);

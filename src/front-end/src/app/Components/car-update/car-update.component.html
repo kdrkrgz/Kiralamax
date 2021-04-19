@@ -79,9 +79,12 @@
         <div class="car-photos-area">
           <ul class="car-photos-list">
             <li *ngFor="let photo of car.photos; let index = index">
+              <div class="img-wrap">
+                <span class="close" (click)="deleteCarPhotoWithConfirm(photo)">&times;</span>
               <img src="https://localhost:5001/{{ photo.path }}" width="50" height="50"
                 style="margin-right: 2px;"/>
-                <a href="javascript:{}" (click)="deleteCarPhotoWithConfirm(photo)">X</a>
+                <!-- <a href="javascript:{}" (click)="deleteCarPhotoWithConfirm(photo)">X</a> -->
+              </div>
             </li>
           </ul>
         </div>

@@ -63,20 +63,33 @@ namespace CarRental.API.Controllers
                 return BadRequest(result);
             }
 
-            imagePaths.ForEach(FileUploadHelper.RemoveFile);
+            //imagePaths.ForEach(FileUploadHelper.RemoveFile);
             return Ok(result);
         }
 
-        //[HttpPut]
-        //public IActionResult Put(Car car)
-        //{
-        //    var result = _carManager.UpdateCar()
-        //    if (result.IsSuccess)
-        //    {
-        //        return Ok(result);
-        //    }
+        [HttpPut]
+        public IActionResult Put([FromForm]CarAddDto carAddDto)
+        {
+            List<string> imagePaths = new List<string>();
 
-        //}
+            if (Request.Form.Files.Count > 0)
+            {
+                var carImages = Request.Form.Files;
+                foreach (var file in carImages)
+                {
+                    // TODO: Filename edit
+                    // upload request form files to under "wwwroot/Images/CarImages" folder and return saving db paths
+                    var dbPath = FileUploadHelper.UploadFile(file,"wwwroot", "Images\\CarImages");
+                    imagePaths.Add(dbPath);
+                }
+            }
+            var car = _mapper.Map<Car>(carAddDto);
+            //if (result.IsSuccess)
+            //{
+            //    return Ok(result);
+            //}
+            return Ok();
+        }
 
         [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id)

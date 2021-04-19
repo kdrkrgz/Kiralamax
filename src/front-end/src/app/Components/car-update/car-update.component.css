@@ -1,25 +1,40 @@
 .car-photos-area {
-    margin-top: 6px;
-    overflow-x: auto;
-    max-width: 250px;
-    max-height: 50px;
-  }
+  margin-top: 6px;
+  overflow-x: auto;
+  max-width: 250px;
+  max-height: 50px;
+}
 
 .car-photos-list {
-    display: inline-flex;
-    }
-    
-    .car-photos-list li {
-    list-style: none;
-    }
+  display: inline-flex;
+}
 
-    .car-photos-list {
-        display: contents  !important;
-        text-align: center;
-        list-style: inside;
-        margin-top: 5px;
-      }
-      
-      .car-photos-list li{
-        display: inline;
-      }
+.car-photos-list li {
+  list-style: none;
+}
+
+.car-photos-list {
+  display: contents !important;
+  text-align: center;
+  list-style: inside;
+  margin-top: 5px;
+}
+
+.car-photos-list li {
+  display: inline;
+}
+
+.img-wrap {
+  position: relative;
+  display: inline-grid;
+ 
+}
+.img-wrap .close {
+  position: absolute;
+  top: -3px;
+  right: 3px;
+  z-index: 100;
+  color: red;
+  font-size: x-large;
+  cursor: pointer;
+}

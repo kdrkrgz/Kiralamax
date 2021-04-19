@@ -20,11 +20,13 @@ namespace CarRental.DataAccess.Concrete.EntityFramework
         public void AddRange(List<Photo> carPhotos)
         {
             _context.CarPhotos.AddRange(carPhotos);
+            _context.SaveChanges();
         }
 
         public void RemoveRange(List<Photo> carPhotos)
         {
             _context.CarPhotos.RemoveRange(carPhotos);
+            _context.SaveChanges();
         }
     }
 }

@@ -46,8 +46,8 @@ namespace CarRental.Entities.Entities
         public int MinCreditScore { get; set; }
 
         public Category Category { get; set; }
-        public IEnumerable<Rental> Rentals { get; set; }
-        public IEnumerable<Photo> Photos {get;set;}
+        public ICollection<Rental> Rentals { get; set; }
+        public ICollection<Photo> Photos {get;set;}
 
     }
 }

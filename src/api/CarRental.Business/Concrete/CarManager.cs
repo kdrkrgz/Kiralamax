@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using CarRental.Business.Abstract;
 using CarRental.Business.BusinessAspects.Autofac;
@@ -30,28 +31,28 @@ namespace CarRental.Business.Concrete
             _photoService = photoService;
         }
 
-        //[CacheAspect]
+        [CacheAspect]
         [LogAspect(typeof(FileLogger))]
         public IDataResult<List<Car>> GetAllCarsWithDetails()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetCarsWithDetails());
         }
 
-        //[CacheAspect]
+        [CacheAspect]
         [LogAspect(typeof(FileLogger))]
         public IDataResult<Car> GetCarWithDetails(int id)
         {
             return new SuccessDataResult<Car>(_carDal.GetCarWithDetails(id));
         }
 
-        //[CacheAspect]
+        [CacheAspect]
         [LogAspect(typeof(FileLogger))]
         public IDataResult<Car> GetCar(int id)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id));
         }
 
-        //[CacheAspect]
+        [CacheAspect]
         [LogAspect(typeof(FileLogger))]
         public IDataResult<List<Car>> GetAllCars()
         {
@@ -63,12 +64,8 @@ namespace CarRental.Business.Concrete
         [CacheRemoveAspect("ICarService.Get")]
         public IResult AddCar(Car car, List<string> carImages)
         {
-            var category = GetAddedCarCategory(car.CategoryId);
-            car.CategoryId = category.Data.Id;
-            car.Category = category.Data;
-            _carDal.Add(car);
+            AddPhotoToCar(carImages, car.Brand + " " + car.CarModel, car);
 
-            AddPhotoToCar(carImages, car.Brand + " " + car.CarModel, car); // böyle bir araç yoking hatası fırlatacak kesin
             return new SuccessResult(Message.CarAdded);
         }
 
@@ -110,8 +107,8 @@ namespace CarRental.Business.Concrete
                 };
                 carPhotos.Add(carPhoto);
             }
-            _photoService.AddCarPhotos(carPhotos);
 
+            _photoService.AddCarPhotos(carPhotos);
             return new SuccessResult();
 
         }

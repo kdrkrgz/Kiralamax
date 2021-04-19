@@ -21,7 +21,7 @@ namespace CarRental.Entities.Entities
 
         public string CompanyName { get; set; }
 
-        public IEnumerable<Rental> Rentals { get; set; }
+        public ICollection<Rental> Rentals { get; set; }
         
         public int AppUserId { get; set; }
 
