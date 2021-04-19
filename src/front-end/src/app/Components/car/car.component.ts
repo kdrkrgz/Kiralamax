@@ -210,7 +210,22 @@ export class CarComponent implements OnInit, AfterViewInit {
     );
     console.log("Gidecek Data : ", data);
 
-    dialogRef.afterClosed().subscribe(res => {      
+    dialogRef.afterClosed().subscribe(res => {
+      console.log("return data after dialog close",res);
+      console.log("data source",this.dataSource);
+      let carRowData = this.dataSource.data.filter((x:Car) => x.id == res.id);
+      console.log("car row", carRowData);
+      carRowData = res;
+      console.log("carrow updated", carRowData);
+      console.log("after data source update",this.dataSource);
+      // şu an araç dinamik güncelleniyor ve datasource'a geliyor. // TODO: foto işlemleri yapılacak datasource üzerinde
+
+
+      /// arraydan aracı sil
+      /// yeni aracı yerine ekle
+
+      //this.dataSource.data = null;
+      //this.GetCarsDataResult();
     })
   }
 

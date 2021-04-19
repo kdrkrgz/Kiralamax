@@ -105,5 +105,5 @@
   <div mat-dialog-actions>
 
     <button mat-stroked-button color="warn" (click)="onNoClick()">İptal</button>
-    <button mat-stroked-button [mat-dialog-close]="" (click)="updateCarWithConfirm()" cdkFocusInitial color="primary">Kaydet</button>
+    <button mat-stroked-button [mat-dialog-close]="data" (click)="updateCarWithConfirm()" cdkFocusInitial color="primary">Kaydet</button>
   </div>

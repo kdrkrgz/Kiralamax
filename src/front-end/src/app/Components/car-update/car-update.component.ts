@@ -79,7 +79,7 @@ export class CarUpdateComponent implements OnInit {
   }
 
   updateCarWithConfirm() {
-    this.confirmService.createConfirm("Araç Fotoğrafı Silme").subscribe(res => {
+    this.confirmService.createConfirm("Araç Güncelleme").subscribe(res => {
       if (res == true) {
         this.updateCar();
       }
@@ -87,14 +87,18 @@ export class CarUpdateComponent implements OnInit {
   }
 
   updateCar(){
-
+    this.data= this.car;
+    console.log("car", this.car);
+    
   }
 
   deleteCarPhoto(photo:Photo){
   console.log("photo :", photo)
     this.carService.DeleteCarPhoto(photo.id).subscribe(response => {
       this.snackBarService.openSnackBarWithMessage(response);
-      response.isSuccess ? this.car.photos = this.data.photos.filter(obj => obj !== photo): null;
+      if(response.isSuccess){
+         this.car.photos = this.data.photos.filter(obj => obj !== photo)
+      }
     })
   }
 
