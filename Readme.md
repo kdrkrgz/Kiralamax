@@ -1,6 +1,3 @@
-Github Adresi: <b><a href="https://github.com/kdrkrgz/Kiralamax.git" target="_blank" >KiralaMAX Github </a></b>
-Projeyi beğenirseniz alırım bir yıldızınızı (:
-
 
 <p><img src="https://imgupload.io/images/2021/04/10/kiralaMAX-Logo-resized.png" alt="Kiralamax Logo" title="Kiralamax Logo"></p>
 <p><img src="https://img.shields.io/github/issues/kdrkrgz/Kiralamax" alt=""> <img src="https://img.shields.io/github/forks/kdrkrgz/Kiralamax" alt=""> <img src="https://img.shields.io/github/stars/kdrkrgz/Kiralamax" alt=""> <img src="https://img.shields.io/github/license/kdrkrgz/Kiralamax" alt=""> </p>
