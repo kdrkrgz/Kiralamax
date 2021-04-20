@@ -4,7 +4,7 @@
 
 ![](https://img.shields.io/github/issues/kdrkrgz/Kiralamax) ![](https://img.shields.io/github/forks/kdrkrgz/Kiralamax) ![](https://img.shields.io/github/stars/kdrkrgz/Kiralamax) ![](https://img.shields.io/github/license/kdrkrgz/Kiralamax) 
 
-Kiralamax, araç kiralama sektöründe faaliyet gösteren şirketlerin araç, kiralama, kullanıcı gibi bileşenlerin yönetilebilmesi ve müşterilerin online kiralama işlemlerini kısa adımlarla gerçekleştirebilmesini amaçlamaktadır. Projede OOP(Object orianted progrraming), AOP (Aspect Oriented Programming) gibi programlama modelleriyle çeşitli sorunlara çözümler sunulmuştur. Diğer taraftan SOLID prensiplerine bağlı clean code olarak kodlanan bir proje olması amaçlanmıştır.  Proje, değerli Engin Demiroğ'un 3 ay boyunca yürütmüş olduğu yazılım geliştirici yetiştirme kampı sonunda verilen proje ödevidir.
+Kiralamax, araç kiralama sektöründe faaliyet gösteren şirketlerin araç, kiralama, kullanıcı gibi bileşenlerin yönetilebilmesi ve müşterilerin online kiralama işlemlerini kısa adımlarla gerçekleştirebilmesini amaçlamaktadır. Projede OOP(Object orianted progrraming), AOP (Aspect Oriented Programming) gibi programlama modelleriyle çeşitli problemlere çözümler sunulmuştur ayrıca SOLID prensiplerine bağlı clean code bir proje olması amaçlanmıştır.
 
 
 **Bölümler**
@@ -106,4 +106,4 @@ Parola : 123456**
 
 
 ### Özel Teşekkür
-Eğitimde fırsat eşitliği düşüncesini savunarak, bilgilerini ve deneyimlerini herhangi bir kar amacı gütmeksizin paylaşan  ve bunun için emek veren değerli insan [@engindemirog](https://github.com/engindemirog "@engindemirog") hocamıza teşekkürler ve sevgilerle..
+Eğitimde fırsat eşitliği düşüncesini savunarak, bilgilerini ve deneyimlerini herhangi bir kar amacı gütmeksizin paylaşan  ve bunun için emek veren değerli insan [@engindemirog](https://github.com/engindemirog "@engindemirog") hocamıza teşekkürler ve sevgilerle.
