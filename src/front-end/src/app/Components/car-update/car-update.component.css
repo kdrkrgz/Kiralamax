@@ -30,11 +30,19 @@
  
 }
 .img-wrap .close {
-  position: absolute;
-  top: -3px;
-  right: 3px;
-  z-index: 100;
-  color: red;
-  font-size: x-large;
+  width: 21px !important;
+  height: 20px !important;
+  position: absolute !important;
+  top: 0px !important;
+  right: 4px !important;
+  z-index: 100 !important;
+  color: white !important;
   cursor: pointer;
+}
+
+.delete-icon {
+  background: #09090999;;
+  height: 19px;
+  width: 18px;
+  font-size: 19px;
 }

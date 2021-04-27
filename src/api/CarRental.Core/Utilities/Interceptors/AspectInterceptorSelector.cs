@@ -16,14 +16,14 @@ namespace CarRental.Core.Utilities.Interceptors
         public IInterceptor[] SelectInterceptors(Type type, MethodInfo method, IInterceptor[] interceptors)
         {
             var classAttributes = type.GetCustomAttributes<MethodInterceptionBaseAttribute>(true).ToList();
-            var methodAttributes =
-                (type.GetMethod(method.Name) ?? throw new InvalidOperationException()).GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
+            var methodAttributes = type.GetMethod(method.Name)
+                .GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
 
-            if(!classAttributes.IsNullOrEmpty()) classAttributes.AddRange(methodAttributes);
+            classAttributes.AddRange(methodAttributes);
             // tüm metodlar için Fileloggera loglama yap.
-            classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger)));
+            //classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger)));
             // metodların çalışması x saniyeden fazla sürerse mail gönder.
-            classAttributes.Add(new PerformanceAspect(10));
+            //classAttributes.Add(new PerformanceAspect(10));
             return classAttributes.OrderBy(x => x.Priority).ToArray();
         }
     }
