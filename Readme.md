@@ -21,7 +21,7 @@ Kiralamax, araç kiralama sektöründe faaliyet gösteren şirketlerin araç, ki
 - [Kurulum ve Kullanım](#kurulum-ve-kullan-m)
     + [Back-end](#back-end-2)
     + [Front-end](#front-end-2)
-- [Özel Teşekkür](#özel-teşekkür)
+
 
 
 
@@ -105,5 +105,3 @@ Parola : 123456**
 `
 
 
-### Özel Teşekkür
-Eğitimde fırsat eşitliği düşüncesini savunarak, bilgilerini ve deneyimlerini herhangi bir kar amacı gütmeksizin paylaşan  ve bunun için emek veren değerli insan [@engindemirog](https://github.com/engindemirog "@engindemirog") hocamıza teşekkürler ve sevgilerle.
